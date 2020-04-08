@@ -20,12 +20,27 @@ Route::post('news/create', 'Admin\NewsController@create');
 Route::post('profile/create', 'Admin\ProfileController@create');
 Route::post('profile/edit', 'Admin\ProfileController@update');
  Route::get('news', 'Admin\NewsController@index')->middleware('auth'); // 追記
+
+    Route::get('news', 'Admin\NewsController@index')->middleware('auth'); // 追記
+    Route::get('news/edit', 'Admin\NewsController@edit')->middleware('auth'); // 追記
+    Route::post('news/edit', 'Admin\NewsController@update')->middleware('auth'); // 追記
+
+    Route::get('news', 'Admin\NewsController@index')->middleware('auth');
+
+    Route::get('news/edit', 'Admin\NewsController@edit')->middleware('auth'); // 追記
+    Route::post('news/edit', 'Admin\NewsController@update')->middleware('auth'); // 追記
+Route::get('news/create', 'Admin\NewsController@add')->middleware('auth');
+    Route::post('news/create', 'Admin\NewsController@create')->middleware('auth');
+    Route::get('news', 'Admin\NewsController@index')->middleware('auth');
+    Route::get('news/edit', 'Admin\NewsController@edit')->middleware('auth');
+    Route::post('news/edit', 'Admin\NewsController@update')->middleware('auth');
+    Route::get('news/delete', 'Admin\NewsController@delete')->middleware('auth');
 });
 Route::get('admin/news/create', 'Admin\NewsController@add');
 Route::get('XXXXXX', 'Admin\AAAController@bbb');
-Route::get('admin/profile/create', 'Admin\ProfileController@add');->middleware('auth');
-Route::get('admin/profile/edit', 'Admin\ProfileController@edit');->middleware('auth');
-});
+Route::get('admin/profile/create', 'Admin\ProfileController@add')->middleware('auth');
+Route::get('admin/profile/edit', 'Admin\ProfileController@edit')->middleware('auth');
+
 
 
 

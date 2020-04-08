@@ -24,7 +24,19 @@ class ProfileController extends Controller
 
     public function update()
     {
+        // Validationをかける
+      $this->validate($request, News::$rules);
+      // News Modelからデータを取得する
+      $news = News::find($request->id);
+      // 送信されてきたフォームデータを格納する
+      $news_form = $request->all();
+      unset($news_form['_token']);
+
+      // 該当するデータを上書きして保存する
+      $news->fill($news_form)->save();
         return redirect('admin/profile/edit');
     }
 
+
+    
 }
