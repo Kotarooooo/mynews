@@ -25,12 +25,16 @@ class ProfileController extends Controller
         return redirect('admin/profile/create');
     }
 
-    public function edit()
-  {
-     return view('admin/profile/edit'); 
-  }
+    public function edit(Request $request)
+    { 
+      $profile = Profile::find($request->id);
+      if (empty($profile)) {
+        abort(404);    
+      } 
+     return view('admin.profile.edit', ['profile_form' => $profile]);
+    }
 
-    public function update($profile)
+    public function update(Request $request)
     {
         // Validationをかける
       $this->validate($request, Profile::$rules);
@@ -42,7 +46,7 @@ class ProfileController extends Controller
 
       // 該当するデータを上書きして保存する
       $profile->fill($profile_form)->save();
-        return redirect('admin/profile/edit');
+        return redirect('admin/profile');
     }
 
 
